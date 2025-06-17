@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Milestone</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Milestone.styles.css" asp-append-version="true" />
+
+    <style>
+        body {
+            background-color: #f4f0fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar, .footer {
+            background-color: #5e35b1;
+        }
+
+        .navbar .navbar-brand, .navbar a.nav-link, .footer {
+            color: white !important;
+        }
+
+        h1, h2, h3 {
+            color: #4a148c;
+        }
+
+        .btn-primary {
+            background-color: #7e57c2;
+            border-color: #7e57c2;
+        }
+
+        .btn-primary:hover {
+            background-color: #5e35b1;
+            border-color: #5e35b1;
+        }
+
+        .btn-outline-primary {
+            color: #5e35b1;
+            border-color: #5e35b1;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #5e35b1;
+            color: white;
+        }
+
+        .table thead {
+            background-color: #ede7f6;
+        }
+
+        .badge.bg-secondary {
+            background-color: #b39ddb;
+        }
+
+        .badge.bg-info {
+            background-color: #ce93d8;
+        }
+
+        .badge.bg-success {
+            background-color: #81c784;
+        }
+
+        .badge.bg-danger {
+            background-color: #e57373;
+        }
+
+        .form-control, .form-select {
+            border-color: #b39ddb;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #7e57c2;
+            box-shadow: 0 0 0 0.2rem rgba(126, 87, 194, 0.25);
+        }
+
+        .card {
+            border: 1px solid #d1c4e9;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Milestone</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            if (User.IsInRole("Leader"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Project" asp-action="Index">Projects</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="ProjectTask" asp-action="Index">Tasks</a>
+                                </li>
+                            }
+                            else if (User.IsInRole("Member"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="ProjectTask" asp-action="Index">Tasks</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Report" asp-action="Index">My Reports</a>
+                                </li>
+                            }
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Milestone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

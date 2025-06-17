@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center py-5">
+    <h1 class="display-4 text-purple">Система управління проектами</h1>
+    <p class="lead">Платформа для керування проектами, завданнями та командною співпрацею.</p>
+
+    <div class="my-4">
+        <a asp-controller="Project" asp-action="Index" class="btn btn-primary btn-lg me-2">Перейти до проектів</a>
+        <a asp-controller="ProjectTask" asp-action="Index" class="btn btn-outline-primary btn-lg">Завдання</a>
+    </div>
+
+    <img src="https://img.freepik.com/free-vector/project-management-concept-illustration_114360-1075.jpg" 
+         alt="Project Management" 
+         class="img-fluid rounded shadow mt-4" style="max-height: 400px;" />
+</div>
+
+<style>
+    .text-purple {
+        color: #6a1b9a;
+    }
+</style>
